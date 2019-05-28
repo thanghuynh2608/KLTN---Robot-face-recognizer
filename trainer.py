@@ -12,6 +12,7 @@ def getImagesWithID(path):
     for imagePath in imagePaths:
         faceImg=Image.open(imagePath).convert('L')
         faceNp=np.array(faceImg, 'uint8')
+        #Chia de lay id cua tung anh rieng biet
         ID = int(os.path.split(imagePath)[-1].split('.')[1])
         faces.append(faceNp)
         IDs.append(ID)
@@ -19,6 +20,7 @@ def getImagesWithID(path):
         cv2.waitKey(10)
     return IDs, faces
 Ids,faces = getImagesWithID(path)
+#training
 recognizer.train(faces,np.array(Ids))
 recognizer.save('recognizer/trainingData.yml')
 cv2.destroyAllWindows()
